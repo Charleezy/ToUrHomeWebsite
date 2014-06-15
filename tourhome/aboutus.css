@@ -87,7 +87,6 @@ img {
     text-transform: uppercase;
     font-weight: 500;
 }
-
 #fifthShadeOfRed:hover {
     background-image: url('helen.png');
     background-size: 100% 372px;
@@ -167,11 +166,4 @@ img {
 	position: relative;
 	bottom: 0px;
 	float: right;
-}
-
-#summary {
-	color: white;
-	font-size: large;
-	font-family: Gill Sans;
-	margin-left: 450px;
 }
