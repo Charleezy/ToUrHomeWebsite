@@ -74,3 +74,14 @@ img {
 #secondButton {
 	font-family: Calibri;
 }
+
+#thirdTransition {
+	font-family: Verdana;
+	font-size: 40px;
+	letter-spacing: 4px;
+	text-shadow: 5px 5px 10px black;
+}
+
+#thirdButton {
+	font-family: Calibri;
+}
