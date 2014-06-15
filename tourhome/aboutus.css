@@ -60,6 +60,7 @@ img {
     font-size: 25px;
     text-transform: uppercase;
     font-weight: 500;
+    color: black;
 }
 #sixthShadeOfRed:hover {
     background-image: url('steven.png');
@@ -86,8 +87,8 @@ img {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 500;
+    color: black;
 }
-
 #fifthShadeOfRed:hover {
     background-image: url('helen.png');
     background-size: 100% 372px;
@@ -113,6 +114,7 @@ img {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: 500;
+    color: black;
 }
 #fourthShadeOfRed:hover {
     background-image: url('charlie.png');
@@ -140,6 +142,7 @@ img {
     font-size: 22px;
     text-transform: uppercase;
     font-weight: 500;
+    color: black;
 }
 #thirdShadeOfRed:hover {
     background-image: url('charlie.jpeg');
@@ -168,10 +171,9 @@ img {
 	bottom: 0px;
 	float: right;
 }
-
-#summary {
+#popUp {
+	font-family: Avenir;
+	font-size: 35px;
 	color: white;
-	font-size: large;
-	font-family: Gill Sans;
-	margin-left: 450px;
+	padding-left: 20px;
 }
