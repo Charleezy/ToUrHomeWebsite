@@ -38,6 +38,7 @@
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
 
         <div class="carousel-inner">
@@ -59,7 +60,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h1 id="secondTransition">about ToUrHome.</h1>
-                        <p><a id="secondButton" class="btn btn-large btn-danger" href="aboutus.html">click here to learn more.</a></p>
+                        <p><a id="secondButton" class="btn btn-large btn-danger" href="aboutTourHome.html">click here to learn more.</a></p>
                     </div>
                 </div>
             </div>
