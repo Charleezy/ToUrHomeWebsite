@@ -82,7 +82,6 @@ if ($submit) {
     	<div id="ToUrHomeTitle">
 	        <a href="http://www.tour-home.org/">
 				<img src="tourhomelogo.png" width="400" height="80" />
-				<img src="couch.png" width="110" height="100" id="couch"/>
 			</a>
 		</div>
         
@@ -100,7 +99,7 @@ if ($submit) {
 	<table id="table">
 		<tr>
 			<td>
-			<font="Gill Sans">Full Name:</font>
+			Your Full Name:
 			</td>
 			<td>
 			<input type='text' name='fullname' value='<?php echo $fullname?>'>
@@ -109,7 +108,7 @@ if ($submit) {
 		
 		<tr>
 			<td>
-			Username:
+			Your Username:
 			</td>
 			<td>
 			<input type='text' name='username' value='<?php echo $username?>'>
@@ -118,7 +117,7 @@ if ($submit) {
 		
 		<tr>
 			<td>
-			Password:
+			Your Password:
 			</td>
 			<td>
 			<input type='password' name='password'>
