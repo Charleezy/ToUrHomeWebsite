@@ -1,6 +1,6 @@
 <?php
 
-echo "<h1>Register</h1>";
+//echo "<h1>Register</h1>";
 
 $submit = $_POST['submit'];
 
@@ -31,7 +31,7 @@ if ($submit) {
 		
 			if (strlen($username) > 25 || strlen($fullname) > 25) {
 			
-				echo "Length of username or full name is too long!";
+				echo "The length of your username exceeds the limit of 25!";
 				
 			} else {
 				
@@ -47,7 +47,7 @@ if ($submit) {
 					
 					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
 					$queryreg1 = mysql_query("INSERT INTO profile VALUES ('', '', '', '', '','')");
-					die("You have been registered! <a href='index.php'> Return to login page</a>");
+					die("Welcome to ToUrHome! <a href='index.php'> Return to login page</a>");
 					
 				}
 				
@@ -57,19 +57,50 @@ if ($submit) {
 			echo "Your passwords do not match!";
 		
 	} else 
-		echo "Please fill in <b>all</b> fields!";
+		echo "Please fill in <b>ALL</b> fields!";
 	
 }
 
 ?>
 
+<!DOCTYPE html>
 <html>
+
+<head>
+	<link rel="stylesheet" href="register.css" type="text/css">
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="bootstrap.css" />
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="bootstrap.js"></script>
+	<title>ToUrHome</title>
+</head>
+
+<body>
+	<div id="header-container">
+	
+	<!ToUrHome TITLE>
+    	<div id="ToUrHomeTitle">
+	        <a href="http://www.tour-home.org/">
+				<img src="tourhomelogo.png" width="400" height="80" />
+				<img src="couch.png" width="110" height="100" id="couch"/>
+			</a>
+		</div>
+        
+        <h1 id="registrationLogo">>>>Registration</h1>
+        
+	</div>
+	
+	<div id="spacing"> </div>
+
+<div id="center">
 <p>
+
 <form action='register.php' method='POST'>
-	<table>
+<img src="bathroom.jpg" height="100%" width="45%"/>
+	<table id="table">
 		<tr>
 			<td>
-			Your full name:
+			<font="Gill Sans">Full Name:</font>
 			</td>
 			<td>
 			<input type='text' name='fullname' value='<?php echo $fullname?>'>
@@ -78,7 +109,7 @@ if ($submit) {
 		
 		<tr>
 			<td>
-			Choose a username:
+			Username:
 			</td>
 			<td>
 			<input type='text' name='username' value='<?php echo $username?>'>
@@ -87,7 +118,7 @@ if ($submit) {
 		
 		<tr>
 			<td>
-			Choose a password:
+			Password:
 			</td>
 			<td>
 			<input type='password' name='password'>
@@ -96,15 +127,24 @@ if ($submit) {
 		
 		<tr>
 			<td>
-			Repeat your password:
+			Re-type password:
 			</td>
 			<td>
 			<input type='password' name='repeatpassword'>
 			</td>
 		</tr>
+		
 	</table>
-	<p>
-	<input type='submit' name='submit' value='Register'>
-</form>
+	
+	<input type='submit' name='submit' value='Register' id="submit">
 
+	<p>
+	
+</form>
+</div>
+
+<div id="secondSpacer"></div>
+	<div id="bottom"></div>
+
+</body>
 </html>
