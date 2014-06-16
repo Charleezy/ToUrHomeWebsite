@@ -14,7 +14,7 @@ $date = date("Y-m-d");
 if ($submit) {
 
 	//open database
-	$connect = mysql_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
+	$connect = mysql_connect("localhost", "root")  or die("Couldn't connect to the database");
 	mysql_select_db("pakfung_phplogin");
 	
 	$namecheck = mysql_query("SELECT username FROM users WHERE username='$username'");
