@@ -145,7 +145,7 @@ img {
     color: black;
 }
 #thirdShadeOfRed:hover {
-    background-image: url('charlie.jpeg');
+    background-image: url('dan.png');
     background-size: 100% 372px;
     background-repeat: no-repeat;
     -webkit-text-fill-color: transparent;
@@ -172,11 +172,7 @@ img {
 	float: right;
 }
 #popUp {
-<<<<<<< HEAD
 	font-family: Verdana;
-=======
-	font-family: Avenir;
->>>>>>> helens-branch
 	font-size: 35px;
 	color: white;
 	padding-left: 20px;

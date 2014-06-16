@@ -35,9 +35,9 @@ img {
 	font-size: 50px;
 }
 
-#couch {
+/*#couch {
 	margin-left: 125px;
-}
+}*/
 
 #spacing {
 	width: 100%;
@@ -53,14 +53,15 @@ img {
 
 #table {
 	float: right;
-	margin-right: 17%;
+	margin-right: 15%;
 	margin-top: 7%;
+	font-family: Verdana;
+	font-size: 15px;
 }
 
 #submit {
 	float: right;
 	margin-top: 20%;
-	margin-left: 5%
 }
 
 #secondSpacer {
