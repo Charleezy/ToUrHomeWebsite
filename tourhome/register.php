@@ -18,7 +18,7 @@ if ($submit) {
 	mysql_select_db("pakfung_phplogin");
 	
 	$namecheck = mysql_query("SELECT username FROM users WHERE username='$username'");
-	$count = mysql_num_rows("$namecheck");
+	$count = mysql_num_rows($namecheck);
 	
 	if ($count != 0) {
 		die("Username already taken!");
@@ -46,7 +46,8 @@ if ($submit) {
 					$repeatpassword = md5($repeatpassword);
 					
 					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
-					die("You have been registered! <a href='index.php> Return to login page</a>");
+					$queryreg1 = mysql_query("INSERT INTO profile VALUES ('', '', '', '', '','')");
+					die("You have been registered! <a href='index.php'> Return to login page</a>");
 					
 				}
 				
@@ -61,7 +62,6 @@ if ($submit) {
 }
 
 ?>
-
 
 <html>
 <p>

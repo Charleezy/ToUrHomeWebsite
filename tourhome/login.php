@@ -26,7 +26,7 @@ if ($username && $password) {
 		
 		if ($username == $dbusername && md5($password) == $dbpassword) {
 			
-			echo "You're In! <a href='member.php'>Click</a> here to enter the member page.";
+			echo "You're In! <a href='manage.php'>Click</a> here to enter the member page.";
 			$_SESSION['username']=$username;
 			
 		} else

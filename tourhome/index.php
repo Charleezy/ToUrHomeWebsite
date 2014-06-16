@@ -20,12 +20,14 @@
 				<img src="tourhomelogo.png" width="400" height="80" />
 			</a>
 		</div>
-            
+        
+		
 		<form id="UserLogin" action='login.php' method='POST'>
 				username: <input type='text' name='username'>
 				password: <input type='password' name='password'>
 				<input type='submit' value='Login'>
 		</form>
+		
 	
 	<!--<p><a id="register" href='register.php'>Register?</a></p>-->
 	</div>
@@ -38,6 +40,7 @@
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
 
         <div class="carousel-inner">
@@ -50,6 +53,19 @@
                     </div>
                 </div>
             </div>
+            
+            
+<!====================================================================>
+
+            <div class="item">
+                <img src="carouselThree.png" />
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1 id="secondTransition">about ToUrHome.</h1>
+                        <p><a id="secondButton" class="btn btn-large btn-danger" href="aboutTourHome.html">click here to learn more.</a></p>
+                    </div>
+                </div>
+            </div>
 
 <!====================================================================>
 
@@ -57,8 +73,8 @@
                 <img src="carouselOne.png" />
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1 id="secondTransition">about ToUrHome.</h1>
-                        <p><a id="secondButton" class="btn btn-large btn-danger" href="aboutus.html">click here to meet the creators.</a></p>
+                        <h1 id="thirdTransition">behind the scenes.</h1>
+                        <p><a id="thirdButton" class="btn btn-large btn-primary" href="aboutus.html">click here to meet the creators.</a></p>
                     </div>
                 </div>
             </div>
