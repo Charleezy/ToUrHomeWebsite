@@ -139,12 +139,12 @@ if ($submit) {
 	<input type='submit' name='submit' value='Register' id="submit">
 
 	<p>
-	
 </form>
+
 </div>
 
-<div id="secondSpacer"></div>
+	<div id="secondSpacer"></div>
 	<div id="bottom"></div>
 
-</body>
+	</body>
 </html>
