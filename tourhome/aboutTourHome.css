@@ -41,7 +41,36 @@ img {
 	background-color: black;
 }
 
-##blackBorder {
+#aboutHeader {
+	background: url("aboutBackground.png");
+	width: 100%;
+	height: 100%;
+	font-family: Verdana;
+}
+
+#whatIs {
+	color: #D4D4D4;
+	font-family: myriad pro;
+	float: right;
+	padding-right: 21%;
+	font-size: 40px;
+	padding-top: 2%;
+	text-shadow: 0px 0px 10px black;
+}
+
+#h1Explanation {
+	float: right;
+	margin-top: 1%;
+	color: #DCDCDC;
+	padding-left: 50%;
+	padding-right: 5%;
+	padding-top: 0%;
+	font-size: 12px;
+	padding-bottom: 3%;
+	text-shadow: 0px 0px 6px black
+}
+
+#blackBorder {
     background-color: #000000;
     margin-right: 0px;
     height: 15px;
@@ -54,7 +83,7 @@ img {
 
 #blueBorder {
 	background-color: #2E3082;
-	height: 150px;
+	height: 160px;
 	width: 100%;
 	position: relative;
 	bottom: 0px;
