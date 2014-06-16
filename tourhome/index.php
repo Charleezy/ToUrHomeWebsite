@@ -20,12 +20,14 @@
 				<img src="tourhomelogo.png" width="400" height="80" />
 			</a>
 		</div>
-            
+        
+		
 		<form id="UserLogin" action='login.php' method='POST'>
 				username: <input type='text' name='username'>
 				password: <input type='password' name='password'>
 				<input type='submit' value='Login'>
 		</form>
+		
 	
 	<!--<p><a id="register" href='register.php'>Register?</a></p>-->
 	</div>
