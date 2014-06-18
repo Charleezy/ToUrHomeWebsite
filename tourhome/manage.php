@@ -68,7 +68,7 @@
 							<div class="nav-collapse">
 								<ul class="nav">
 									<li class="active"><a href="manage.php">Home</a></li>
-									<li><a href="#" onclick="confirmbox()">About</a></li>
+									<li><a href="aboutTourHome.html">About</a></li>
 									<li><a href="#contact" onclick="aboutmsg()">Contact</a></li>
 								</ul>
 							</div><!--/.nav-collapse -->
