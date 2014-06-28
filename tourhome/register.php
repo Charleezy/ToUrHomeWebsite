@@ -46,9 +46,14 @@ if ($submit) {
 					$repeatpassword = md5($repeatpassword);
 					
 					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
-					$queryreg1 = mysql_query("INSERT INTO profile VALUES ('', '', '', '', '','')");
-					die("Welcome to ToUrHome! <a href='index.php'> Return to login page</a>");
-					
+					$userID = mysql_query("SELECT id FROM users where username = '$username'");
+					if (!$userID) {
+						$userID  = 'User was not created, query:' . mysql_error() . "\n";
+						die($userID);
+					}
+					$insert_profile_query = sprintf("INSERT INTO profile (id) VALUES ('%s')", mysql_fetch_row($userID)[0]);
+					$queryreg2 = mysql_query($insert_profile_query);
+					die("Welcome to ToUrHome! <a href='index.php'> Return to login page</a>");		
 				}
 				
 			}
