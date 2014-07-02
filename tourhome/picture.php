@@ -17,5 +17,5 @@ $update_profile_image_query = sprintf("update profile set image='%s' where id in
 #Currently not getting username because we're using sessions to see if users are logged in
 #echo "<script type='text/javascript'>alert({". $update_profile_image_query . "});</script>";
 $query=mysql_query("update profile set image='$destination' where id in (select id from users natural join (select * from profile) as p where username = '$UserName')") or die(mysql_error());
-#header("refresh:0;url=manage.php");
+header("refresh:0;url=manage.php");
 ?>
