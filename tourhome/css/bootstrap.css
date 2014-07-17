@@ -1534,8 +1534,6 @@ table {
   background-color: #0088cc;
 }
 
-tr:nth-child(even)		{ background-color:#effffd; }
-
 .table td {
   padding: 8px;
   line-height: 18px;
