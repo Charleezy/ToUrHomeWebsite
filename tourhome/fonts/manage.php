@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 		<!-- prototype for user management page -->
 		<!DOCTYPE html>
 		<html lang="en">

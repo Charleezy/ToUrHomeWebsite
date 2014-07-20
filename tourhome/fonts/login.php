@@ -3,7 +3,7 @@
 //stevenpakfunglau on samuel-huntington.dreamhost.com will be created with password 8!t*8B5r
 
 session_start();
-$_SESSION['username'] = $_POST['username'];
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 
