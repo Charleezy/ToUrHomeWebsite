@@ -5,7 +5,13 @@
 $submit = $_POST['submit'];
 
 // strip_tags remove tags that user inputs
-$fullname = strip_tags($_POST['fullname']);
+//old 
+//$fullname = strip_tags($_POST['fullname']);
+
+//new
+$first_name = strip_tags($_POST['first_name']);
+$last_name = strip_tags($_POST['first_name']);
+
 $username = strtolower(strip_tags($_POST['username']));
 $password = strip_tags($_POST['password']);
 $repeatpassword = strip_tags($_POST['repeatpassword']);
@@ -25,11 +31,13 @@ if ($submit) {
 	}
 	
     // check for existance
-	if ($fullname&&$username&&$password&&$repeatpassword) {
+	//if ($fullname&&$username&&$password&&$repeatpassword) {
+	
+	if ($first_name&&$last_name&&$username&&password&&repeatpassword) {
 		
 		if ($password == $repeatpassword) {
 		
-			if (strlen($username) > 25 || strlen($fullname) > 25) {
+			if (strlen($username) > 25 || strlen($first_name) > 25) {
 			
 				echo "The length of your username exceeds the limit of 25!";
 				
@@ -45,7 +53,8 @@ if ($submit) {
 					$password = md5($password);
 					$repeatpassword = md5($repeatpassword);
 					
-					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
+					//$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
+					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$first_name', '$last_name', '$username', '$password', '$date')");
 					$userID = mysql_query("SELECT id FROM users where username = '$username'");
 					if (!$userID) {
 						$userID  = 'User was not created, query:' . mysql_error() . "\n";
@@ -104,12 +113,22 @@ if ($submit) {
 	<table id="table">
 		<tr>
 			<td>
-			Your Full Name:
+			Your First Name:
 			</td>
 			<td>
-			<input type='text' name='fullname' value='<?php echo $fullname?>'>
+			<input type='text' name='first_name' value='<?php echo $first_name?>'>
 			</td>
 		</tr>
+		
+		<tr>
+			<td>
+			Your Last Name:
+			</td>
+			<td>
+			<input type='text' name='last_name' value='<?php echo $last_name?>'>
+			</td>
+		</tr>
+
 		
 		<tr>
 			<td>
