@@ -1,0 +1,17 @@
+/*
+Default site layout css
+*/
+
+/* Uploaded images will now dynamically resize so if you upload a large file it won't be bigger than other people's*/
+img .profileImg{
+    max-width: 100%;
+    height: auto;
+}
+
+/* Make image thumbnails of profile always the same size as they're shown
+Images 
+If the image provided is greater than 200px, then use that image
+*/
+div .profileImg{
+	style="max-width: 200px;
+}

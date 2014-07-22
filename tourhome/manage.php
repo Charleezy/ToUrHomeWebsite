@@ -53,7 +53,7 @@
 			
 		
 			<body background="img/2.jpg">
-				<!-- top meanu part on the login page -->
+				<!-- top menu part on the login page -->
 				<div class="navbar navbar-fixed-top">
 					<div class="navbar-inner">
 						<div class="container-fluid">
@@ -114,13 +114,13 @@
 		
 									<li class="nav-header">Search</li>
 									
-									<li <?php if($pageName=="searchposts"){echo "class='active'";}?>>
-									<a href="manage.php?id=searchposts">Search posts</a>
+									<li <?php if($pageName=="search_posts"){echo "class='active'";}?>>
+									<a href="manage.php?id=search_posts">Search posts</a>
 									</li>
 		
 									<li <?php if($pageName=="recentsearch"){echo "class='active'";}?>>
-									<a href="manage.php?id=recentsearch&">My recent searches</a>
-									</li>
+									<!--<a href="manage.php?id=recentsearch&">My recent searches</a>
+									</li>-->
 		
 									<li <?php if($pageName=="search_user"){echo "class='active'";}?>>
 									<a href="manage.php?id=search_user&">Find a user</a>
@@ -143,8 +143,8 @@
 		
 							<div class="hero-unit">
 							<?php
-							if ($pageName=="searchposts"){
-								include 'searchposts.php';
+							if ($pageName=="search_posts"){
+								include 'search_posts.php';
 							}
 							if ($pageName=="recentsearch"){
 								include 'recentsearch.php';

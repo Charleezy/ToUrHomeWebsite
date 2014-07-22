@@ -197,7 +197,7 @@ a:hover {
 .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 1171px;
+  width: 100%;
 }
 
 .span12 {
@@ -797,9 +797,14 @@ input[type="color"],
   color: #555555;
 }
 
-input,
-textarea {
+input
+{
   width: 210px;
+}
+
+textarea
+{
+  width: 500px;
 }
 
 textarea {

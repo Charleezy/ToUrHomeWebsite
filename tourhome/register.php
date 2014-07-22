@@ -5,7 +5,8 @@
 $submit = $_POST['submit'];
 
 // strip_tags remove tags that user inputs
-$fullname = strip_tags($_POST['fullname']);
+$firstName = strip_tags($_POST['first_name']);
+$lastName = strip_tags($_POST['last_name']);
 $username = strtolower(strip_tags($_POST['username']));
 $password = strip_tags($_POST['password']);
 $repeatpassword = strip_tags($_POST['repeatpassword']);
@@ -25,13 +26,13 @@ if ($submit) {
 	}
 	
     // check for existance
-	if ($fullname&&$username&&$password&&$repeatpassword) {
+	if ($firstName&&$lastName&&$username&&$password&&$repeatpassword) {
 		
 		if ($password == $repeatpassword) {
 		
-			if (strlen($username) > 25 || strlen($fullname) > 25) {
+			if (strlen($username) > 25 || strlen($firstName) > 25 || strlen($lastName) > 25 ) {
 			
-				echo "The length of your username exceeds the limit of 25!";
+				echo "The length of your username/name exceeds the limit of 25!";
 				
 			} else {
 				
@@ -45,13 +46,17 @@ if ($submit) {
 					$password = md5($password);
 					$repeatpassword = md5($repeatpassword);
 					
-					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$fullname', '$username', '$password', '$date')");
-					$userID = mysql_query("SELECT id FROM users where username = '$username'");
+					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$firstName', '$lastName' , '$username', '$password', '$date')");
+					
+					$result = mysql_query("SELECT id FROM users where username = '$username'");
+					//Note, a query result gets generated from a query regardless of whether the query is successful
+					$userID = mysql_fetch_row($result)[0];
+					
 					if (!$userID) {
 						$userID  = 'User was not created, query:' . mysql_error() . "\n";
 						die($userID);
 					}
-					$insert_profile_query = sprintf("INSERT INTO profile (id) VALUES ('%s')", mysql_fetch_row($userID)[0]);
+					$insert_profile_query = sprintf("INSERT INTO profile (id) VALUES ('%s')", $userID);
 					$queryreg2 = mysql_query($insert_profile_query);
 					die("Welcome to ToUrHome! <a href='index.php'> Return to login page</a>");		
 				}
@@ -104,10 +109,19 @@ if ($submit) {
 	<table id="table">
 		<tr>
 			<td>
-			Your Full Name:
+			Your First Name:
 			</td>
 			<td>
-			<input type='text' name='fullname' value='<?php echo $fullname?>'>
+			<input type='text' name='first_name' value='<?php echo $firstName?>'>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+			Your Last Name:
+			</td>
+			<td>
+			<input type='text' name='last_name' value='<?php echo $lastName?>'>
 			</td>
 		</tr>
 		

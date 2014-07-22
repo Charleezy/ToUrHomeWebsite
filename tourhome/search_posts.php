@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-#When you first navigate to the search page with no param do not show any entries
-if( !isset($_POST['city']) || !isset($_POST['country'])){
+#When you first navigate to the search page with no param do not show any entries and do not comment that no fields were entered
+if( !isset($_POST['city']) && !isset($_POST['country'])){
 goto first_navigation;
 }
 
@@ -12,16 +12,18 @@ $country=$_POST['country'];
 #Search for posts matching user criteria and returns them
 #Using mysqli to ensure no sql injection
 #Users can not search by post-name, perhaps they should be able to save posts for future viewing
-#TODO: Border case, what if we have a user living in Markham who wants to let people sleep on their couch but most people visiting Toronto only search Toronto? Make the search area based using something(Google)(maps)(geo) instead of a city, country pair.
+#TODO: Border case, what if we have a user living in Markham who wants to let people sleep on their couch but most people visiting Toronto only search Toronto? Make the search area based using something(Google)(maps)(geo) instead of a city, country pair
+#TODO:, set list of cities and countries to select from
 
 $mysqli = new mysqli("mysql.tour-home.org", "stevenpakfunglau", "libertinelux", "pakfung_phplogin");
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
-if (!($stmt = $mysqli->prepare("SELECT p.name, username, description, poster_id, creation_date, modification_date
-FROM posts AS p
+if (!($stmt = $mysqli->prepare("SELECT po.name, username, description, poster_id, contact, age, gender, creation_date, modification_date
+FROM posts AS po
 LEFT JOIN users AS u ON poster_id = u.id
+join profile AS pr ON pr.id= u.id
 WHERE city = ?
 AND country = ?"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
@@ -51,7 +53,7 @@ first_navigation:
 </head>
 <body>
 	<div class="search_form">
-		<form class="form-inline" role="form" action="manage.php?id=searchposts" method="post" id="searchForm">
+		<form class="form-inline" role="form" action="manage.php?id=search_posts" method="post" id="searchForm">
 			<label class="sr-only" for="post-name">Post Name*</label>
 			<input type="text" id="post-name" name="post-name">
 			<label class="sr-only" for="city">City</label>
@@ -80,7 +82,7 @@ first_navigation:
 				}
 				for ($i = 0; $i < $result->num_rows; $i++) {
 				$row = $result->fetch_array(MYSQLI_ASSOC);
-				printf ("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", $row["name"], $row["description"], $row["username"], $row["creation_date"], $row["modification_date"]);
+				printf ("<tr><td>%s</td><td>%s</td><td>%s<br />%s<br />%d %s</td><td>%s</td><td>%s</td></tr>", $row["name"], $row["description"], $row["username"], $row["contact"], $row["age"], $row["gender"], $row["creation_date"], $row["modification_date"]);
 				}
 				
 				$stmt->close();
