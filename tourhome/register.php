@@ -95,7 +95,7 @@ if ($submit) {
 			</a>
 		</div>
         
-        <h1 id="registrationLogo">>>>Registration</h1>
+        <h1 id="registrationLogo">Registration</h1>
         
 	</div>
 	
@@ -123,7 +123,20 @@ if ($submit) {
 			<td>
 			<input type='text' name='last_name' value='<?php echo $lastName?>'>
 			</td>
+			<td>
+			<input type='text' name='first_name' value='<?php echo $first_name?>'>
+			</td>
 		</tr>
+		
+		<tr>
+			<td>
+			Your Last Name:
+			</td>
+			<td>
+			<input type='text' name='last_name' value='<?php echo $last_name?>'>
+			</td>
+		</tr>
+
 		
 		<tr>
 			<td>
