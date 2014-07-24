@@ -15,6 +15,10 @@ $query = mysqli_query($con,$sql);
         <td>Id</td>
         <td>Name</td>
         <td>City</td>
+        <td>Country</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Link</td>
     </tr>
 
     <?php
@@ -23,6 +27,10 @@ $query = mysqli_query($con,$sql);
         echo "<td>".$row['id']."</td>";
         echo "<td>".$row['username']."</td>";
         echo "<td>".$row['City']."</td>";
+        echo "<td>".$row['Country']."</td>";
+        echo "<td>".$row['name']."</td>";
+        echo "<td>".$row['description']."</td>";
+        echo "<td><a href=\"".$row['url']."\">View Post</a></td>";
         echo "</tr>";
     }
 

@@ -26,6 +26,10 @@ mysqli_select_db($con, "pakfung_phplogin");
         <form name='form1' method='post' action='post_submit.php'>
             
             <span class='add-on'>
+            Title:
+            </span><input class='span2' name='post-title' type='text' size='15' id='post-title' value=""></input><br><br>
+            
+            <span class='add-on'>
             Country:
             </span><input class='span2' name='country' type='text' size='15' id='country' value=""></input><br><br>
             

@@ -10,33 +10,43 @@ $country = mysqli_real_escape_string($con,$_POST['country']);
 $city = mysqli_real_escape_string($con,$_POST['city']);
 //$freetimes = mysqli_real_escape_string($con,$_POST['freetimes']);
 $description = mysqli_real_escape_string($con,$_POST['description']);
+$post_title = mysqli_real_escape_string($con,$_POST['post-title']);
 //pictures
 //other variables..
 
+$data['post-title'] = $post_title;
 $data['username'] = $UserName;
 $data['country'] = $country;
 $data['city'] = $city;
 $data['description'] = $description;
-$data_seperated = implode(", ", $data);
+
+//$data_seperated = implode(", ", $data);
 
 
 //add to database
-$sql = "INSERT INTO posts (username, Country, City, description, creation_date, modification_date)
-VALUES ('$UserName', '$country', '$city', '$description', now(), now())";
+$sql = "INSERT INTO posts (username, name, Country, City, description, creation_date, modification_date)
+VALUES ('$UserName', '$post_title', '$country', '$city', '$description', now(), now())";
 
-echo $sql;
 if (!mysqli_query($con,$sql)) {
     die('Error: ' . mysqli_error($con));
 }
 
-$data['postid'] = mysqli_insert_id($con);
-echo "postid: ".$data['postid'];
+$postid = mysqli_insert_id($con);
+$data['postid'] = $postid;
+$html_file_name = $data['postid']."-".$data['post-title'].".php"; 
+
+$sql = "UPDATE posts
+SET url='$html_file_name'
+WHERE id='$postid'";
+
+if (!mysqli_query($con,$sql)) {
+    die('Error: ' . mysqli_error($con));
+}
 
 //fill out post template
-$placeholders = array("{username}", "{country}", "{city}", "{description}", "{postid}"); 
+$placeholders = array("{post-title}", "{username}", "{country}", "{city}", "{description}", "{postid}", "{url}"); 
 $tpl = file_get_contents('post-template.php'); 
 $new_member_file = str_replace($placeholders, $data, $tpl); 
-$html_file_name = $data['postid'].".php"; 
 //write new post to file
 $fp = fopen("./posts/".$html_file_name, "x");
 fwrite($fp, $new_member_file);

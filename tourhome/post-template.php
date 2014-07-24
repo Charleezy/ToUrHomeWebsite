@@ -6,11 +6,11 @@
     </head>
     
     <body>
-        {username}
-        {country}
-        {city}
-        {description}
-        
+        User: {username}<br>
+        Country: {country}<br>
+        City: {city}<br>
+        Description: {description}<br>
+        Title: {post-title}<br>
         
         <?php
             //include delete, edit functionality here
