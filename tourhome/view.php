@@ -30,7 +30,7 @@ $query = mysqli_query($con,$sql);
         echo "<td>".$row['Country']."</td>";
         echo "<td>".$row['name']."</td>";
         echo "<td>".$row['description']."</td>";
-        echo "<td><a href=\"".$row['url']."\">View Post</a></td>";
+        echo "<td><a href=\"./posts/".$row['url']."\">View Post</a></td>";
         echo "</tr>";
     }
 
