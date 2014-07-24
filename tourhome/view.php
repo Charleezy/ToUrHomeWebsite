@@ -14,7 +14,7 @@ $query = mysqli_query($con,$sql);
     <tr class="header">
         <td>Id</td>
         <td>Name</td>
-        <td>Title</td>
+        <td>City</td>
     </tr>
 
     <?php

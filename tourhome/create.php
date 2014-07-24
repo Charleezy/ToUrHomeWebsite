@@ -2,8 +2,8 @@
 session_start();
 $UserName="";
 if(isset($_SESSION["username"])){$UserName=$_SESSION["username"];}
-$connect = mysql_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
-mysql_select_db("pakfung_phplogin");
+$con = mysqli_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
+mysqli_select_db($con, "pakfung_phplogin");
 
 	//get the profile of the current user from database.
 	//$query=mysql_query("select image,contact,age,gender  from users natural join profile where UserName='$UserName'") or die(mysql_error());
@@ -18,7 +18,7 @@ mysql_select_db("pakfung_phplogin");
 
 	<form name='form1' method='post' action="post_picture.php" enctype="multipart/form-data">
         Add pictures of your place here.<br>
-        <input type="file" name="file1" id="file1"></input></td>
+        <input type="file" name="uploads[]" multiple></input></td>
         <input name='compare' type='submit' id='compare' value='upload'></input><br>
 	</form>
 
