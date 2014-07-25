@@ -9,31 +9,33 @@ $UserName = $_SESSION['username'];
 //fetch posts from current sessions username
 $query = mysqli_query($con,$sql);
  ?>
+<div id="postlist">
+    <table class="striped">
+        <tr class="header">
+            <td>Id</td>
+            <td>Name</td>
+            <td>City</td>
+            <td>Country</td>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Link</td>
+        </tr>
 
-<table class="striped">
-    <tr class="header">
-        <td>Id</td>
-        <td>Name</td>
-        <td>City</td>
-        <td>Country</td>
-        <td>Title</td>
-        <td>Description</td>
-        <td>Link</td>
-    </tr>
+        <?php
+        $pageName=@$_GET['id'];
+        while ($row = mysqli_fetch_array($query)) {
+            echo "<tr>";
+            echo "<td>".$row['id']."</td>";
+            echo "<td>".$row['username']."</td>";
+            echo "<td>".$row['City']."</td>";
+            echo "<td>".$row['Country']."</td>";
+            echo "<td>".$row['name']."</td>";
+            echo "<td>".$row['description']."</td>";
+            echo "<td><a href=\"./posts/".$row['url']."\">View Post</a></td>";
+            echo "</tr>";
+        }
 
-    <?php
-    while ($row = mysqli_fetch_array($query)) {
-        echo "<tr>";
-        echo "<td>".$row['id']."</td>";
-        echo "<td>".$row['username']."</td>";
-        echo "<td>".$row['City']."</td>";
-        echo "<td>".$row['Country']."</td>";
-        echo "<td>".$row['name']."</td>";
-        echo "<td>".$row['description']."</td>";
-        echo "<td><a href=\"./posts/".$row['url']."\">View Post</a></td>";
-        echo "</tr>";
-    }
-
-    mysqli_close($con);
-    ?>
-</table>
+        mysqli_close($con);
+        ?>
+    </table>
+</div>
