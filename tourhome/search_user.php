@@ -21,10 +21,10 @@ if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
-if (!($stmt = $mysqli->prepare("SELECT DISTINCT username, image, about, max_guests, age, gender
+if (!($stmt = $mysqli->prepare("SELECT DISTINCT u.username, image, about, max_guests, age, gender
 FROM users AS u LEFT JOIN posts AS po ON poster_id = u.id
 join profile AS pr ON pr.id= u.id
-WHERE username like ?
+WHERE u.username like ?
 AND city = ?
 AND country = ?"))) {
 	echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;

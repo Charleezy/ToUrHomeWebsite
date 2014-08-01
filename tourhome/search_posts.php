@@ -20,7 +20,7 @@ if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
-if (!($stmt = $mysqli->prepare("SELECT po.name, username, description, poster_id, contact, age, gender, creation_date, modification_date
+if (!($stmt = $mysqli->prepare("SELECT po.name, u.username, description, poster_id, contact, age, gender, creation_date, modification_date
 FROM posts AS po
 LEFT JOIN users AS u ON poster_id = u.id
 join profile AS pr ON pr.id= u.id
