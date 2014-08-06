@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 		<!-- prototype for user management page -->
 		<!DOCTYPE html>
 		<html lang="en">
@@ -56,7 +53,7 @@ session_start();
 			
 		
 			<body background="img/2.jpg">
-				<!-- top meanu part on the login page -->
+				<!-- top menu part on the login page -->
 				<div class="navbar navbar-fixed-top">
 					<div class="navbar-inner">
 						<div class="container-fluid">
@@ -117,17 +114,11 @@ session_start();
 		
 									<li class="nav-header">Search</li>
 									
-									<li <?php if($pageName=="searchposts"){echo "class='active'";}?>>
-									<a href="manage.php?id=searchposts">Search posts</a>
+									<li <?php if($pageName=="search_posts"){echo "class='active'";}?>>
+									<a href="manage.php?id=search_posts">Search posts</a>
 									</li>
 		
-									<li <?php if($pageName=="recentsearch"){echo "class='active'";}?>>
-									<a href="manage.php?id=recentsearch&">My recent searches</a>
-									</li>
-		
-									<li <?php if($pageName=="search_user"){echo "class='active'";}?>>
-									<a href="manage.php?id=search_user&">Find a user</a>
-									</li>
+			
 		
 									
 		
@@ -146,14 +137,8 @@ session_start();
 		
 							<div class="hero-unit">
 							<?php
-							if ($pageName=="searchposts"){
-								include 'searchposts.php';
-							}
-							if ($pageName=="recentsearch"){
-								include 'recentsearch.php';
-							}
-							if ($pageName=="search_user"){
-								include 'search_user.php';
+							if ($pageName=="search_posts"){
+								include 'search_posts.php';
 							}
 							if ($pageName==""){
 								include 'profile.php';
