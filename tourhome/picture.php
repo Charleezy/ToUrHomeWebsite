@@ -8,14 +8,22 @@ if($_FILES['file1']['name']!=''){
 $destination="upload/".$_FILES['file1']['name'];
 $UserName="";
 if(isset($_SESSION['username'])){$UserName=$_SESSION['username'];}
-$connect = mysql_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
-mysql_select_db("pakfung_phplogin");
+$mysqli = new mysqli("mysql.tour-home.org", "stevenpakfunglau", "libertinelux", "pakfung_phplogin");
 
-#echo "<script type='text/javascript'>alert(' destination {". $destination . "}');</script>";
-#Note: There is a nuance with updating a table when you are selecting it in a nested query in MySQL. To get around this you use "select * from profile as p" instead of just "profile"
-$update_profile_image_query = sprintf("update profile set image='%s' where id in (select id from users natural join (select * from profile) as p where username = '%s')", $destination, $UserName);
+#Note: There is a nuance with updating a table when you are selecting it in a nested query in MySQL. To get around this you use "(select * from profile) as p" instead of just "profile"
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+if (!($update_profile_image_query = $mysqli->prepare("update profile set image=? where id in (select id from users natural join (select * from profile) as p where username = ?)"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+if (!$update_profile_image_query->bind_param("ss", $destination, $UserName)) {
+	echo "Binding parameters failed: (" . $update_profile_image_query->errno . ") " . $update_profile_image_query->error;
+}
+if (!$update_profile_image_query->execute()) {
+    echo "Execute failed: (" . $update_profile_image_query->errno . ") " . $update_profile_image_query->error;
+}
+
 #Currently not getting username because we're using sessions to see if users are logged in
-#echo "<script type='text/javascript'>alert({". $update_profile_image_query . "});</script>";
-$query=mysql_query("update profile set image='$destination' where id in (select id from users natural join (select * from profile) as p where username = '$UserName')") or die(mysql_error());
-header("refresh:0;url=manage.php");
+header("refresh:0;url=manage.php?change_success");
 ?>

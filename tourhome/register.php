@@ -1,25 +1,35 @@
 <?php
 
 //echo "<h1>Register</h1>";
+if(isset($_POST['submit'])){
+$submit = $_POST['submit'];}
 
-$submit = $_POST['submit'];
-
-// strip_tags remove tags that user inputs
-$firstName = strip_tags($_POST['first_name']);
-$lastName = strip_tags($_POST['last_name']);
-$username = strtolower(strip_tags($_POST['username']));
-$password = strip_tags($_POST['password']);
-$repeatpassword = strip_tags($_POST['repeatpassword']);
-$date = date("Y-m-d");
-
-if ($submit) {
+if (isset($submit)) {
+	// strip_tags remove tags that user inputs
+	$firstName = strip_tags($_POST['first_name']);
+	$lastName = strip_tags($_POST['last_name']);
+	$username = strtolower(strip_tags($_POST['username']));
+	$password = strip_tags($_POST['password']);
+	$repeatpassword = strip_tags($_POST['repeatpassword']);
+	$date = date("Y-m-d");
 
 	//open database
-	$connect = mysql_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
-	mysql_select_db("pakfung_phplogin");
+	$mysqli = new mysqli("mysql.tour-home.org", "stevenpakfunglau", "libertinelux", "pakfung_phplogin");
 	
-	$namecheck = mysql_query("SELECT username FROM users WHERE username='$username'");
-	$count = mysql_num_rows($namecheck);
+	if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+	}
+	if (!($insert_stmt = $mysqli->prepare("SELECT username FROM users WHERE username=?"))) {
+		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+	if (!$insert_stmt->bind_param("s", $username)) {
+		echo "Binding parameters failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+	}
+	if (!$insert_stmt->execute()) {
+		echo "Execute failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+	}
+	$namecheck = $insert_stmt->get_result();
+	$count = mysqli_num_rows($namecheck);
 	
 	if ($count != 0) {
 		die("Username already taken!");
@@ -46,11 +56,27 @@ if ($submit) {
 					$password = md5($password);
 					$repeatpassword = md5($repeatpassword);
 					
-					$queryreg = mysql_query("INSERT INTO users VALUES ('', '$firstName', '$lastName' , '$username', '$password', '$date')");
+					if (!($insert_stmt = $mysqli->prepare("INSERT INTO users VALUES ('', ?, ? , ?, ?, ?)"))) {
+						echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+					}
+					if (!$insert_stmt->bind_param("sssss", $firstName, $lastName, $username, $password, $date)) {
+						echo "Binding parameters failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+					}
+					if (!$insert_stmt->execute()) {
+						echo "Execute failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+					}
 					
-					$result = mysql_query("SELECT id FROM users where username = '$username'");
-					//Note, a query result gets generated from a query regardless of whether the query is successful
-					$userID = mysql_fetch_row($result)[0];
+					if (!($select_stmt = $mysqli->prepare("SELECT id FROM users where username = ?"))) {
+						echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+					}
+					if (!$select_stmt->bind_param("s", $username)) {
+						echo "Binding parameters failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+					}
+					if (!$select_stmt->execute()) {
+						echo "Execute failed: (" . $insert_stmt->errno . ") " . $insert_stmt->error;
+					}
+					$user_found = $select_stmt->get_result();
+					$userID = $user_found->fetch_row()[0];
 					
 					if (!$userID) {
 						$userID  = 'User was not created, query:' . mysql_error() . "\n";
@@ -112,7 +138,7 @@ if ($submit) {
 			Your First Name:
 			</td>
 			<td>
-			<input type='text' name='first_name' value='<?php echo $firstName?>'>
+			<input type='text' name='first_name' value=''>
 			</td>
 		</tr>
 		
@@ -121,29 +147,16 @@ if ($submit) {
 			Your Last Name:
 			</td>
 			<td>
-			<input type='text' name='last_name' value='<?php echo $lastName?>'>
-			</td>
-			<td>
-			<input type='text' name='first_name' value='<?php echo $first_name?>'>
+			<input type='text' name='last_name' value=''>
 			</td>
 		</tr>
-		
-		<tr>
-			<td>
-			Your Last Name:
-			</td>
-			<td>
-			<input type='text' name='last_name' value='<?php echo $last_name?>'>
-			</td>
-		</tr>
-
 		
 		<tr>
 			<td>
 			Your Username:
 			</td>
 			<td>
-			<input type='text' name='username' value='<?php echo $username?>'>
+			<input type='text' name='username' value=''>
 			</td>
 		</tr>
 		
@@ -176,6 +189,6 @@ if ($submit) {
 
 	<div id="secondSpacer"></div>
 	<div id="bottom"></div>
-
+	<footer><a href="index.php">Return to main page</a></footer>
 	</body>
 </html>

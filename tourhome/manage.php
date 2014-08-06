@@ -160,7 +160,7 @@
 								include 'change_password.php';
 							}
 							if ($pageName=="change_success"){
-								echo "<p>change success</p>";
+								echo "<p>change successful.</p>";
 							}
 							if ($pageName=="delete_account"){
 								?>

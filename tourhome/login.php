@@ -9,15 +9,27 @@ $password = $_POST['password'];
 
 if ($username && $password) {
 
-	$connect = mysql_connect("mysql.tour-home.org", "stevenpakfunglau", "libertinelux")  or die("Couldn't connect to the database");
-	mysql_select_db("pakfung_phplogin") or die("Couldn't find the database.");
+	$mysqli = new mysqli("mysql.tour-home.org", "stevenpakfunglau", "libertinelux", "pakfung_phplogin");
 	
-	$query = mysql_query("SELECT * FROM users WHERE username='$username'");
-	$numrows = mysql_num_rows($query);
+	if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+	}
+	if (!($find_user = $mysqli->prepare("SELECT * FROM users WHERE username=?"))) {
+		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+	if (!$find_user->bind_param("s", $username)) {
+		echo "Binding parameters failed: (" . $find_user->errno . ") " . $find_user->error;
+	}
+	if (!$find_user->execute()) {
+		echo "Execute failed: (" . $find_user->errno . ") " . $find_user->error;
+	}
+	
+	$result = $find_user->get_result();
+	$numrows = mysqli_num_rows($result);
 	
 	if ($numrows != 0) {
 	
-		while ($row = mysql_fetch_assoc($query)) {
+		while ($row = $result->fetch_assoc()) {
 			
 			$dbusername = $row['username'];
 			$dbpassword = $row['password'];
