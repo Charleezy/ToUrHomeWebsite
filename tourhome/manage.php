@@ -1,4 +1,5 @@
 		<!-- prototype for user management page -->
+		<?php error_reporting(0);?>
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -7,9 +8,9 @@
 			<meta name="viewport" content="width=device-width, initial-scale=2.0">
 			<meta name="description" content="">
 			<meta name="author" content="">
-		
+			
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 			<script src="js/bootstrap.js"></script>
-			<script src="js/bootbox.js"></script>
 		
 			<!-- modification of the styles -->
 		
@@ -52,7 +53,7 @@
 		
 			
 		
-			<body background="img/2.jpg">
+			<body>
 				<!-- top menu part on the login page -->
 				<div class="navbar navbar-fixed-top">
 					<div class="navbar-inner">
@@ -109,7 +110,7 @@
 									</li>
 		
 									<li <?php if(($pageName=="view")or($pageName=="search")){echo "class='active'";}?>>
-										<a href="manage.php?id=view&">Display all posts</a>
+										<a href="manage.php?id=view&">Display all your posts</a>
 									</li>
 		
 									<li class="nav-header">Search</li>
@@ -193,25 +194,6 @@
 		
 		
 		<script type="text/javascript">
-		
-		function aboutmsg()
-		
-		{
-		
-		
-		
-		
-		
-			alert("Hello world!");
-		
-		
-		
-		
-		
-		bootbox.alert("Please contact us if your website is CRUSHED!");
-		
-		}
-		
 		
 		function checkup2()
 		{

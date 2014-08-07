@@ -1,105 +1,72 @@
 <!DOCTYPE html>
-<html>
-    <head>
-       <meta charset="utf-8">
-        <title>ToUrhome</title>
-		<meta name="viewport" content="width=device-width, initial-scale=2.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<script src="js/bootstrap.js"></script>
-		<script src="js/bootbox.js"></script>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Housing Post</title>
+		<link rel="stylesheet" type="text/css" href="postviewing.css" />
 		
-		<!-- modification of the styles -->
-		
-		<link href="css/bootstrap.css" rel="stylesheet">
-        
-        <style type="text/css">
-			#a{
-				width:200px;
-				overflow:hidden;
-				white-space:nowrap;
-				text-overflow:ellipsis;
-			}
-		
-			body {
-				padding-top: 80px;
-				padding-bottom: 20px;
-			}
-		
-			.sidebar-nav {
-				padding: 10px 0;
-			}
-		
-			.mainpost {
-			  padding: 6px;
-			  margin-bottom: 3px;
-			  background-color: rgba(170,168,168,0.5);
-			  -webkit-border-radius: 6px;
-			     -moz-border-radius: 6px;
-			          border-radius: 6px;
-		
-			}
-		
-			well sidebar-nav{
-				background-color: navy;
-			}
-		
-        </style>
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    
-    <body>
-
-        <div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					<a class="brand" href="#">ToUrHome</a>
-					<!-- layout for the username and password text field -->
-					<!-- tags on the top -->
-					<div class="nav-collapse">
-						<ul class="nav">
-							<li class="active"><a href="../manage.php">Home</a></li>
-							<li><a href="../aboutTourHome.html">About</a></li>
-							<li><a href="#contact" onclick="aboutmsg()">Contact</a></li>
-						</ul>
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-        </div>
-        <!-- display post images -->
-        <div class="span9">
-            <div class="mainpost">
-                Pictures:<br>
-
-                <?php
+		<!--Pictures-->
+		<link rel="stylesheet" type="text/css" href="icons.css" />
+		<link rel="stylesheet" type="text/css" href="postviewings.css" />
+	
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>
+				
+				<?php
                     //get base directory
                     $dirname = dirname(dirname(__FILE__)) . '/img/posts/{postid}/';
+                    //$dirname = '/tour-home.org/img/posts/{postid}/';
                     $images = glob($dirname."*.{jpg,png,gif,bmp}", GLOB_BRACE);
                     foreach($images as $image) {
-                        echo '<img src="'.$image.'" /><br />';
+                        echo '<img src="http://www.tour-home.org/img/posts/{postid}/'. basename($image) .'" width="250" height="250" /><br />';
                     }
 
                 ?>
+				{post-title}</h1>	
+				
+			</header>
+			
+			<section class="col-2 ss-style-triangles">
+				<div class="column text">
+					<h2>what country and city does {username} lives in?</h2>
+					<p>{country}, {city}</p>
+				</div>
+				<div class="column">
+					<span class="icon icon-headphones"></span>
+				</div>
+			</section>
+			
+			<section class="color">
+				<h2>description of what {username} has to offer.</h2>
+				<p> {description}</p>
+			</section>
+		
+			<section class="col-2 ss-style-halfcircle">
+				<div class="column">
+					<span class="icon icon-images"></span>
+				</div>
+				<div class="column text">
+					<h2>{username}'s contact information.</h2>
+					<p>Needs to be coded.</p>
+					<br>
+					<a href="../delete_post.php?postid={postid}" onclick="return checkup()">delete post</a><br>
+					<a href="../edit_post.php?postid={postid}">edit</a><br>
+					<a href="../manage.php">return</a><br />
+				</div>
+			</section>
+			
+			<!--<section class="color ss-style-bigtriangle">
+				<h2>{username}'s contact information.</h2>
+				<p>asdfghjkl</p>
+				
+			</section>-->
 
-
-                User: {username}<br>
-                Country: {country}<br>
-                City: {city}<br>
-                Description: {description}<br>
-                Title: {post-title}<br>
-
-                <!-- delete -->
-                <a href="delete_post.php" onclick="return checkup()">Delete Post</a><br>
-                <!-- edit -->
-                <a href="edit_post.php">Edit</a><br>
-            </div>
-        </div>
-        
-    <script type="text/javascript">
+		</div><!-- /container -->
+		
+		<script type="text/javascript">
         function checkup2()
             {
               if(window.confirm("Are you sure you want to delete this post?"))
@@ -112,6 +79,6 @@
               }
             }
     </script>
-    </body>
-</html>
 
+	</body>
+</html>
