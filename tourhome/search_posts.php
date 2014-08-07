@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 #When you first navigate to the search page with no param do not show any entries and do not comment that no fields were entered
 if( !isset($_POST['city']) && !isset($_POST['country'])){
@@ -8,6 +7,7 @@ goto first_navigation;
 
 $city=$_POST['city'];
 $country=$_POST['country'];
+$postname=$_POST['post-name'];
 
 #Search for posts matching user criteria and returns them
 #Using mysqli to ensure no sql injection
@@ -19,18 +19,64 @@ $mysqli = new mysqli("mysql.tour-home.org", "stevenpakfunglau", "libertinelux", 
 if ($mysqli->connect_errno) {
     echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-
-if (!($stmt = $mysqli->prepare("SELECT po.name, username, description, poster_id, contact, age, gender, creation_date, modification_date
-FROM posts AS po
-LEFT JOIN users AS u ON poster_id = u.id
-join profile AS pr ON pr.id= u.id
-WHERE city = ?
-AND country = ?"))) {
-    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+if ($city == "" and $country == "") {
+	if ($postname =="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts "))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}if ($postname !="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE name='$postname'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}
 }
 
-if (!$stmt->bind_param("ss", $city, $country)) {
-	echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+if ($city != "" and $country == "") {
+	if ($postname =="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE City = '$city'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}if ($postname !="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE name='$postname'
+	AND City = '$city'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}
+}
+
+if ($city == "" and $country != "") {
+	if ($postname =="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE Country = '$country'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}if ($postname !="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE name='$postname'
+	AND Country = '$country'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}
+}
+
+if ($city != "" and $country != "") {
+if ($postname =="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE City = '$city'
+	AND Country = '$country'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}if ($postname !="") {
+	if (!($stmt = $mysqli->prepare("SELECT name, username, description, poster_id, creation_date, modification_date, url
+	FROM posts 
+	WHERE name='$postname'
+	AND City = '$city'
+	AND Country = '$country'"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;}
+}
 }
 
 if (!$stmt->execute()) {
@@ -54,35 +100,38 @@ first_navigation:
 <body>
 	<div class="search_form">
 		<form class="form-inline" role="form" action="manage.php?id=search_posts" method="post" id="searchForm">
-			<label class="sr-only" for="post-name">Post Name*</label>
+			<label class="sr-only" for="post-name">Post Name</label>
 			<input type="text" id="post-name" name="post-name">
 			<label class="sr-only" for="city">City</label>
-			<input type="text" id="city" name="city" placeholder="Enter city" required>
+			<input type="text" id="city" name="city">
 			<label class="sr-only" for="country">Country</label>
-			<input type="text" id="country" name="country" placeholder="Enter country" required>
+			<input type="text" id="country" name="country">
 		  <button type="submit" class="btn btn-default">Search</button>
 		</form>
+		</br>
+		Leave all fields blank will display all posts<br />
 	</div>
-	</br>
-	*Leave blank if you don't know the post name<br />
-	City and Country are required.
-	<div class='container'>
+	<div class='123'>
         <table class='table table-bordered table-striped sortable'>
             <thead>
                 <tr>
-                    <th style="width: 10%" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th>
-                    <th style="width: 50%" data-defaultsign="month">Description</th>
-                    <th style="width: 10%" data-firstsort="desc">Poster</th>
-                    <th style="width: 15%">Creation date</th>
-                    <th style="width: 15%" data-mainsort="true">Modification date</th>
+                    <th style="width:10%" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th>
+                    <th width="35%" data-defaultsign="month">Description</th>
+                    <th width="10%" data-firstsort="desc">Poster</th>
+                    <th width="15%">Creation date</th>
+                    <th width="15%" data-mainsort="true">Modification date</th>
+					<th width="15%">Link</th>
                 </tr>
-				<?php 
+				
+            </thead>
+            <tbody>
+			<?php 
 				if(!isset($result)){
 				goto no_result;
 				}
 				for ($i = 0; $i < $result->num_rows; $i++) {
 				$row = $result->fetch_array(MYSQLI_ASSOC);
-				printf ("<tr><td>%s</td><td>%s</td><td>%s<br />%s<br />%d %s</td><td>%s</td><td>%s</td></tr>", $row["name"], $row["description"], $row["username"], $row["contact"], $row["age"], $row["gender"], $row["creation_date"], $row["modification_date"]);
+				printf ("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><a href=\"./posts/".$row['url']."\">View Post</a></td></tr>", $row["name"], $row["description"], $row["username"], $row["creation_date"], $row["modification_date"]);
 				}
 				
 				$stmt->close();
@@ -91,8 +140,6 @@ first_navigation:
 				
 				no_result:
 				?>
-            </thead>
-            <tbody>
             </tbody>
         </table>
     </div>

@@ -30,7 +30,7 @@ echo "
 				<!ToUrHome TITLE>
 					<div id='ToUrHomeTitle'>
 						<a href='http://www.tour-home.org/'>
-							<img src='redlogo3.png' width='400' height='90'/>
+							<img src='tourhomelogo.png' width='400' height='90'/>
 						</a>
 			</div>
         
@@ -39,4 +39,4 @@ echo "
 			<div id='spacing'> </div>";
 
 
-echo "<p>You've been logged out. <a href='index.php'>Click</a> here to return to the homepage.</p>";
+echo "<p>You've been logged out. <a href='index.html'>Click</a> here to return to the homepage.</p>";

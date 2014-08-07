@@ -44,7 +44,7 @@ if ($username && $password) {
 				<!ToUrHome TITLE>
 					<div id='ToUrHomeTitle'>
 						<a href='http://www.tour-home.org/'>
-							<img src='redlogo3.png' width='400' height='90'/>
+							<img src='tourhomelogo.png' width='400' height='90'/>
 						</a>
 			</div>
         
@@ -63,7 +63,7 @@ if ($username && $password) {
 
 			<div class='carousel-inner'>
 					<div class='item active'>
-						<img src='carouselFour.png'/>
+						<img src='carouselTwo.png'/>
                 <div class='container'>
                     <div class='carousel-caption'>
                         <h1 id='firstTransition'>welcome, $username!</h1>
@@ -74,7 +74,7 @@ if ($username && $password) {
       
 
             echo "<div class='item'>
-                <img src='carouselThree.png'/>
+                <img src='carouselFour.png'/>
                 <div class='container'>
                     <div class='carousel-caption'>
                         <h1 id='secondTransition'>about ToUrHome.</h1>
@@ -124,5 +124,4 @@ if ($username && $password) {
 		
 } else 
 	die("Please enter a username and password!");
-
 ?>

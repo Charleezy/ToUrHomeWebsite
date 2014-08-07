@@ -118,13 +118,7 @@
 									<a href="manage.php?id=search_posts">Search posts</a>
 									</li>
 		
-									<li <?php if($pageName=="recentsearch"){echo "class='active'";}?>>
-									<!--<a href="manage.php?id=recentsearch&">My recent searches</a>
-									</li>-->
-		
-									<li <?php if($pageName=="search_user"){echo "class='active'";}?>>
-									<a href="manage.php?id=search_user&">Find a user</a>
-									</li>
+			
 		
 									
 		
@@ -145,12 +139,6 @@
 							<?php
 							if ($pageName=="search_posts"){
 								include 'search_posts.php';
-							}
-							if ($pageName=="recentsearch"){
-								include 'recentsearch.php';
-							}
-							if ($pageName=="search_user"){
-								include 'search_user.php';
 							}
 							if ($pageName==""){
 								include 'profile.php';
